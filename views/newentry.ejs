@@ -1,0 +1,9 @@
+<%-include ("partials/header") %>
+
+<form action="/new" method="POST">
+    <input style="width:80%; margin:20px" name="title" type="text" placeholder="Title"><br>
+    <textarea style="width:80%; margin:20px" name="content" rows="10" required placeholder="Content"></textarea><br>
+    <input type="submit" value="Submit">
+</form>
+
+<%-include ("partials/footer") %>

@@ -1,0 +1,74 @@
+body {
+    background-color: white;
+    font-family: "Linux Libertine", "Georgia", "Times", serif;
+}
+
+.container {
+    padding: 20px;
+}
+
+header {
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+
+.header-content {
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.logo {
+    width: 50px; 
+    height: auto; 
+}
+
+h1 {
+    margin: 0; 
+    font-size: 24px;
+}
+.header-link {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.header-link:hover {
+    color: inherit; 
+}
+
+.header-link:active {
+    color: inherit; 
+}
+/*CSS for flexbox*/
+.article-container {
+    display: flex;
+    height: 70vh;
+    flex-direction: row;
+    justify-content: flex-start;     
+}
+.article-item {
+    background-color: #f1f1f1;;
+    margin: 10px;
+}
+.article-content {
+    padding: 20px;
+    margin-left: auto;
+    flex-grow: 2;   
+}
+.side-bar { 
+    left: 0;
+    width: 150px;
+    padding: 20px;  
+}
+
+.article-content iframe {
+    margin-bottom: 10px; 
+}
+
+.article-content input[type="button"] {
+    display: block;
+    margin-top: 10px;
+}
+
+
+  

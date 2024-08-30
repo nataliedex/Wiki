@@ -1,0 +1,80 @@
+<%- include ("partials/header") %>
+
+<div class ="article-container">
+    <div class="article-item side-bar">
+        <h2>Articles</h2>
+        <form action="/submit" method="GET" >
+            <input placeholder="Search" name="search">
+            <input type="Submit" value="Submit">
+        </form>
+        <form action="/random" method="GET">
+            <input type="submit" value="Random">
+        </form>
+        <ul>
+            <% articles.forEach(article => { %>
+                <li class="article">
+                    <a href="#" data-article="<%= article.title %>"><%= article.title %></a>
+                </li>
+            <% }); %>
+        </ul>
+
+        <form action="/new" method="GET">
+            <input type="submit" value="New Article">
+        </form>
+        
+
+        
+        
+    </div>
+    <div class="article-item article-content">
+        <% if (typeof selectedArticle !== 'undefined') { %>
+            <h1><%= selectedArticle.title %></h1>
+            <p><%= selectedArticle.content %></p>
+            <form action="/edit" method="GET">
+                <input class="edit" type="submit" value="Edit" title="<%=selectedArticle.title  %>">
+                <input type="hidden" name="title" value="<%= selectedArticle.title %>">
+
+        <% } else { %>
+            <% const n = Math.floor(Math.random()*articles.length) %>
+            <h1><%= articles[n].title %></h1>
+            <p><%= articles[n].content %></p>
+            <form action="/edit" method="GET">
+                <input class="edit" type="submit" value="Edit" title="<%= articles[n].title %>">
+                <input type="hidden" name="title" value="<%= articles[n].title %>">
+            </form>
+        <% } %>
+        
+        
+    </div>
+</div>
+    
+
+<%- include ("partials/footer")%>
+
+<script>
+document.querySelectorAll('.article a').forEach(item => {
+    item.addEventListener('click', function(event) {
+        event.preventDefault();
+        const articleTitle = this.dataset.article;
+
+        fetch(`/article?title=${encodeURIComponent(articleTitle)}`)
+            .then(response => {
+             if (!response.ok) {
+                    throw new Error('Network response was not ok');
+             }
+     
+             return response.json();
+         })
+         .then(data => {
+                
+                document.querySelector('.article-content h1').innerText = data.title;
+                document.querySelector('.article-content p').innerText = data.content;
+
+                document.querySelector('.article-content input[name="title"]').value = data.title;
+            })
+            .catch(error => console.error('Fetch error:', error));
+    });
+});
+
+</script>
+
